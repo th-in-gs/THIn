@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'THIn' target in the 'THIn' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
