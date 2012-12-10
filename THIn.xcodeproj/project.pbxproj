@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7D7762231675F71E006004BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7762221675F71E006004BA /* Foundation.framework */; };
 		7D77622A1675F71E006004BA /* THIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7762291675F71E006004BA /* THIn.m */; };
-		7D88B33C1675FAD400940038 /* THIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D7762271675F71E006004BA /* THIn.h */; };
+		7D88B33C1675FAD400940038 /* THIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D7762271675F71E006004BA /* THIn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
