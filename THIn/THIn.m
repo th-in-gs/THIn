@@ -34,8 +34,9 @@
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, _delay * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        if(wTarget) {
-            [invocation invokeWithTarget:wTarget];
+        id obj = wTarget;
+        if(obj) {
+            [invocation invokeWithTarget:obj];
         }
     });
 }
@@ -60,7 +61,10 @@
 
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        block(wSelf);
+        id obj = wSelf;
+        if(obj) {
+            block(wSelf);
+        }
     });
 }
 
