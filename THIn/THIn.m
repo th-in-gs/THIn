@@ -29,8 +29,8 @@
 {
     __weak id wTarget = _target;
     
-    [invocation retainArguments];
     [invocation setTarget:nil];
+    [invocation retainArguments];
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, _delay * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
