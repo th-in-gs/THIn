@@ -10,8 +10,16 @@
 
 @interface NSObject (THIn)
 
-- (id)thIn:(NSTimeInterval)delay;
+- (instancetype)thIn:(NSTimeInterval)delay;
 
 - (void)thIn:(NSTimeInterval)delay do:(void(^)(id obj))block;
+
+@end
+
+
+@interface THInWeakTimer : NSObject
+
+- (id)initWithDelay:(NSTimeInterval)delay do:(void (^)(void))block;
+- (void)invalidate;
 
 @end

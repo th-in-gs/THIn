@@ -50,9 +50,9 @@
 
 @implementation NSObject (THIn)
 
-- (id)thIn:(NSTimeInterval)delay
+- (instancetype)thIn:(NSTimeInterval)delay
 {
-    return [[THInMessageProxy alloc] initWithTarget:self delay:delay];
+    return (id)[[THInMessageProxy alloc] initWithTarget:self delay:delay];
 }
 
 - (void)thIn:(NSTimeInterval)delay do:(void(^)(id obj))block
@@ -66,6 +66,31 @@
             block(obj);
         }
     });
+}
+
+@end
+
+@implementation THInWeakTimer {
+    void(^_block)(void);
+}
+
+- (id)initWithDelay:(NSTimeInterval)delay do:(void (^)(void))block
+{
+    if((self = [super init])) {
+        _block = block;
+        [[self thIn:delay] _fire];
+    }
+    return self;
+}
+
+- (void)_fire
+{
+    _block();
+}
+
+- (void)invalidate
+{
+    _block = nil;
 }
 
 @end
