@@ -7,7 +7,6 @@
 //
 
 #import "THIn.h"
-#import <objc/message.h>
 
 @interface THInMessageProxy : NSProxy
 @end
