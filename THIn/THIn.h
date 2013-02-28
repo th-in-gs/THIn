@@ -16,10 +16,10 @@
 
 @end
 
-
 @interface THInWeakTimer : NSObject
 
 - (id)initWithDelay:(NSTimeInterval)delay do:(void (^)(void))block;
+
 - (void)invalidate;
 
 @end

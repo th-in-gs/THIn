@@ -13,6 +13,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D59B60C16E0190C008A3EE3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		7D59B60D16E0190C008A3EE3 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = ReadMe.md; sourceTree = "<group>"; wrapsLines = 1; };
 		7D77621F1675F71E006004BA /* libTHIn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTHIn.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D7762221675F71E006004BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7D7762261675F71E006004BA /* THIn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "THIn-Prefix.pch"; sourceTree = "<group>"; };
@@ -35,6 +37,8 @@
 		7D7762141675F71E006004BA = {
 			isa = PBXGroup;
 			children = (
+				7D59B60D16E0190C008A3EE3 /* ReadMe.md */,
+				7D59B60C16E0190C008A3EE3 /* LICENSE */,
 				7D7762241675F71E006004BA /* THIn */,
 				7D7762211675F71E006004BA /* Frameworks */,
 				7D7762201675F71E006004BA /* Products */,
