@@ -84,7 +84,9 @@
 
 - (void)_fire
 {
-    _block();
+    if(_block) {
+        _block();
+    }
 }
 
 - (void)invalidate
