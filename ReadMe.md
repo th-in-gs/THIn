@@ -13,13 +13,13 @@ jamie@th.ingsmadeoutofotherthin.gs, [http://th.ingsmadeoutofotherthin.gs/](http:
 
 Three ways! All call back on the main thread/runloop/dispatch queue.
 
-1. A Category on `NSObject` defines a `-thIn:` method takes an `NSTimeInterval` and returns a proxy object that will call any methods called on it after the interval (the recently new `instancetype` return type makes this type safe too!). 
+1. A Category on `NSObject` defines a `-thIn:` method takes an `NSTimeInterval` and returns a proxy object. Methods sent to it will be queued and sent to the original object after the interval elapses. The recently new `instancetype` return type makes this type-safe too! 
 
     ```ObjC
     [[self thIn:3] doYourThingWithThisArray:@[ @"Everybody", @"to", @"the", @"limit!" ]]
     ```
 
-2. A Category on `NSObject` defines a `-thIn:do:` method takes an `NSTimeInterval` and a block, and calls them after the interval.
+2. A Category on `NSObject` defines a `-thIn:do:` method takes an `NSTimeInterval` and a block, and invokes the block after the interval.
 
     ```ObjC
     [self thIn:3 do:^(id obj) { 
