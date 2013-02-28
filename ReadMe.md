@@ -36,7 +36,7 @@ Three ways! All call back on the main thread/runloop/dispatch queue.
     @end
     ```
     
-In the first two cases, the target object is weakly held, so if it is released before the interval is up, the queued message/block will never be sent/called. Why? This is what made sense for my initial use case, and I still haven't found a case where I don't like the behaviour.
+In the first two cases, the target object is weakly held, so if it is released before the interval is up, the queued message/block will never be sent/invoked. Why? This is what made sense for my initial use case, and I still haven't found a case where I don't like the behaviour.
 
 ## How to use it
 
