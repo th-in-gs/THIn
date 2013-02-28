@@ -11,30 +11,30 @@ jamie@th.ingsmadeoutofotherthin.gs, [http://th.ingsmadeoutofotherthin.gs/](http:
 
 ## How it works
 
-Three ways! All call back on the main thread/runloop/dispath queue.
+Three ways! All call back on the main thread/runloop/dispatch queue.
 
-1. A Category on `NSObject` defines a `-thIn:` method takes a `CFTimeInterval` and returns a proxy object that will call any methods called on it after the interval (the recently new 'instancetype' return type makes this type safe too!) 
+1. A Category on `NSObject` defines a `-thIn:` method takes an `NSTimeInterval` and returns a proxy object that will call any methods called on it after the interval (the recently new `instancetype` return type makes this type safe too!)
 
-```ObjC
-[[self thIn:3] doYourThingWithThisArray:@[ @"Everybody", @"to", @"the", @"limit!" ]]
-```
+    ```ObjC
+    [[self thIn:3] doYourThingWithThisArray:@[ @"Everybody", @"to", @"the", @"limit!" ]]
+    ```
 
-2. A Category on `NSObject` defines a `-thIn:do:` method takes a `CFTimeInterval` and a block, and calls them after the interval
+2. A Category on `NSObject` defines a `-thIn:do:` method takes an `NSTimeInterval` and a block, and calls them after the interval.
 
-```ObjC
-[self thIn:3 do:^(id obj) { 
-    NSLog(@"The passed in object is the same as self. It's weakly held: %@", obj");
-}];
-```
+    ```ObjC
+    [self thIn:3 do:^(id obj) { 
+        NSLog(@"The passed in object is the same as self. It's weakly held: %@", obj");
+    }];
+    ```
 
-3. Building on these, `THInWeakTimer` is a lightweight timer. It has two methods. Invalidate specifically cancels the timer. The timer is also implicitly cancelled if the `THInWeakTimer` is deallocated.
+3. Building on these, `THInWeakTimer` is a lightweight timer. It has two methods. `-invalidate` specifically cancels the timer. The timer is also implicitly cancelled if the `THInWeakTimer` is deallocated.
 
-```ObjC
-@interface THInWeakTimer : NSObject
-- (id)initWithDelay:(NSTimeInterval)delay do:(void (^)(void))block;
-- (void)invalidate;
-@end
-```
+    ```ObjC
+    @interface THInWeakTimer : NSObject
+    - (id)initWithDelay:(NSTimeInterval)delay do:(void (^)(void))block;
+    - (void)invalidate;
+    @end
+    ```
 
 ## How to use it
 
