@@ -13,7 +13,7 @@ jamie@th.ingsmadeoutofotherthin.gs, [http://th.ingsmadeoutofotherthin.gs/](http:
 
 Three ways! All call back on the main thread/runloop/dispatch queue.
 
-1. A Category on `NSObject` defines a `-thIn:` method takes an `NSTimeInterval` and returns a proxy object that will call any methods called on it after the interval (the recently new `instancetype` return type makes this type safe too!)
+1. A Category on `NSObject` defines a `-thIn:` method takes an `NSTimeInterval` and returns a proxy object that will call any methods called on it after the interval (the recently new `instancetype` return type makes this type safe too!). 
 
     ```ObjC
     [[self thIn:3] doYourThingWithThisArray:@[ @"Everybody", @"to", @"the", @"limit!" ]]
@@ -35,6 +35,8 @@ Three ways! All call back on the main thread/runloop/dispatch queue.
     - (void)invalidate;
     @end
     ```
+    
+In the first two cases, the target object is weakly held, so if it is released before the interval is up, the queued message/block will never be sent/called. Why? This is what made sense for my initial use case, and I still haven't found a case where I don't like the behaviour.
 
 ## How to use it
 
