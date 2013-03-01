@@ -16,14 +16,14 @@ Three ways! All call back on the main thread/runloop/dispatch queue.
 1. A Category on `NSObject` defines a `-thIn:` method that takes an `NSTimeInterval` and returns a proxy object. Methods sent to it will be queued and sent to the original object after the interval elapses. The recently new `instancetype` return type makes this type-safe too! 
 
     ```ObjC
-    [[self thIn:3] doYourThingWithThisArray:@[ @"Everybody", @"to", @"the", @"limit!" ]]
+    [[self thIn:3] doYourThingWithThisArray:@[ @"Everybody", @"to", @"the", @"limit!" ]];
     ```
 
 2. A Category on `NSObject` defines a `-thIn:do:` method that takes an `NSTimeInterval` and a block, and invokes the block after the interval elapses.
 
     ```ObjC
     [self thIn:3 do:^(id obj) { 
-        NSLog(@"The passed in object is the same as self. It's weakly held: %@", obj");
+        NSLog(@"The passed in object is the same as self. It's weakly held: %@", obj);
     }];
     ```
 
