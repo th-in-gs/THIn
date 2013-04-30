@@ -69,29 +69,79 @@
 
 @end
 
+
 @implementation THInWeakTimer {
     void(^_block)(void);
+    CFRunLoopTimerRef _runLoopTimer;
 }
 
 - (id)initWithDelay:(NSTimeInterval)delay do:(void (^)(void))block
 {
-    if((self = [super init])) {
-        _block = block;
-        [[self thIn:delay] _fire];
-    }
+    return [self initWithFireTime:CFAbsoluteTimeGetCurrent() + delay do:block];
+}
+
+- (id)initWithFireTime:(CFAbsoluteTime)fireTime do:(void (^)(void))block
+{
+    _block = [block copy];
+    
+    __weak THInWeakTimer *wSelf = self;
+    _runLoopTimer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault,
+                                                    fireTime,
+                                                    0,
+                                                    0,
+                                                    0,
+                                                    ^(CFRunLoopTimerRef timer) {
+                                                        [wSelf _fire];
+                                                    });
+    CFRunLoopAddTimer(CFRunLoopGetMain(), _runLoopTimer, kCFRunLoopCommonModes);
+    
     return self;
+}
+
+- (BOOL)isValid
+{
+    return _runLoopTimer && CFRunLoopTimerIsValid(_runLoopTimer);
+}
+
+- (CFAbsoluteTime)fireTime
+{
+    CFAbsoluteTime fireTime = -1;
+    if(_runLoopTimer && CFRunLoopTimerIsValid(_runLoopTimer)) {
+        fireTime = CFRunLoopTimerGetNextFireDate(_runLoopTimer);
+    }
+    return fireTime;
+}
+
+- (void)setFireTime:(CFAbsoluteTime)fireTime
+{
+    if(_runLoopTimer && CFRunLoopTimerIsValid(_runLoopTimer)) {
+        CFRunLoopTimerSetNextFireDate(_runLoopTimer, fireTime);
+    } 
 }
 
 - (void)_fire
 {
     if(_block) {
         _block();
+        [self invalidate];
     }
 }
 
 - (void)invalidate
 {
-    _block = nil;
+    if(_runLoopTimer) {
+        if(CFRunLoopTimerIsValid(_runLoopTimer)) {
+            CFRunLoopTimerInvalidate(_runLoopTimer);
+        }
+        CFRelease(_runLoopTimer);
+        _runLoopTimer = nil;
+        _block = nil;
+    }
+}
+
+- (void)dealloc
+{
+    [self invalidate];
 }
 
 @end
