@@ -27,7 +27,7 @@ Three ways! All call back on the main thread/runloop/dispatch queue.
     }];
     ```
 
-3. Building on these, `THInWeakTimer` is a lightweight timer. It has two methods. `-invalidate` specifically cancels the timer. The timer is also implicitly cancelled if the `THInWeakTimer` is deallocated.
+3. `THInWeakTimer` is a lightweight timer. It has two main methods. `-invalidate` specifically cancels the timer. The timer is also implicitly cancelled if the `THInWeakTimer` is deallocated.
 
     ```ObjC
     @interface THInWeakTimer : NSObject
