@@ -42,3 +42,7 @@ In the first two cases, the target object is weakly held. This means that if it 
 
 I've packaged this as a static library, you should be able to use it as detailed [in this blog post](http://www.blog.montgomerie.net/easy-xcode-static-library-subprojects-and-submodules). It's only a couple of files though, so I won't tell anyone if you just copy them into your project instead.
 
+## Updated by @bendodson
+
+I've deleted the static library leaving just the .h and .m file and added a Podfile instead. Enjoy!
+
