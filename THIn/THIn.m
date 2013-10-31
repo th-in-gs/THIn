@@ -75,19 +75,14 @@
     CFRunLoopTimerRef _runLoopTimer;
 }
 
-- (id)initWithDelay:(NSTimeInterval)delay do:(void (^)(void))block
-{
-    return [self initWithFireTime:CFAbsoluteTimeGetCurrent() + delay do:block];
-}
-
-- (id)initWithFireTime:(CFAbsoluteTime)fireTime do:(void (^)(void))block
+- (id)_initWithFireTime:(CFAbsoluteTime)fireTime repeatInterval:(CFTimeInterval)interval do:(void (^)(void))block
 {
     _block = [block copy];
     
     __weak THInWeakTimer *wSelf = self;
     _runLoopTimer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault,
                                                     fireTime,
-                                                    0,
+                                                    interval,
                                                     0,
                                                     0,
                                                     ^(CFRunLoopTimerRef timer) {
@@ -96,6 +91,21 @@
     CFRunLoopAddTimer(CFRunLoopGetMain(), _runLoopTimer, kCFRunLoopCommonModes);
     
     return self;
+}
+
+- (id)initWithFireTime:(CFAbsoluteTime)fireTime do:(void (^)(void))block
+{
+    return [self _initWithFireTime:fireTime repeatInterval:0 do:block];
+}
+
+- (id)initWithDelay:(NSTimeInterval)delay do:(void (^)(void))block
+{
+    return [self _initWithFireTime:CFAbsoluteTimeGetCurrent() + delay repeatInterval:0 do:block];
+}
+
+- (id)initWithRepeatingDelay:(NSTimeInterval)delay do:(void (^)(void))block;
+{
+    return [self _initWithFireTime:CFAbsoluteTimeGetCurrent() + delay repeatInterval:delay do:block];
 }
 
 - (BOOL)isValid
@@ -123,7 +133,9 @@
 {
     if(_block) {
         _block();
-        [self invalidate];
+        if(_runLoopTimer && !CFRunLoopTimerDoesRepeat(_runLoopTimer)) {
+            [self invalidate];
+        }
     }
 }
 

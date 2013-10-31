@@ -170,7 +170,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -200,8 +199,9 @@
 			buildSettings = {
 				ARCHS = (
 					armv7,
-					x86_64,
 					armv7s,
+					arm64,
+					x86_64,
 				);
 				DSTROOT = /tmp/THIn.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -219,8 +219,9 @@
 			buildSettings = {
 				ARCHS = (
 					armv7,
-					x86_64,
 					armv7s,
+					arm64,
+					x86_64,
 				);
 				DSTROOT = /tmp/THIn.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

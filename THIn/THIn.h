@@ -20,6 +20,7 @@
 
 - (id)initWithDelay:(NSTimeInterval)delay do:(void (^)(void))block;
 - (id)initWithFireTime:(CFAbsoluteTime)fireTime do:(void (^)(void))block;
+- (id)initWithRepeatingDelay:(NSTimeInterval)delay do:(void (^)(void))block;
 - (void)invalidate;
 
 @property (nonatomic, assign) CFAbsoluteTime fireTime;
