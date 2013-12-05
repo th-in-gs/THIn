@@ -26,18 +26,12 @@
 
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
-    __weak id wTarget = _target;
-    
     [invocation setTarget:nil];
     [invocation retainArguments];
     
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, _delay * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        id obj = wTarget;
-        if(obj) {
-            [invocation invokeWithTarget:obj];
-        }
-    });
+    [_target thIn:_delay do:^(id obj) {
+        [invocation invokeWithTarget:obj];
+    }];
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
