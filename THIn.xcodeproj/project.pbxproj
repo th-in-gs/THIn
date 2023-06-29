@@ -172,6 +172,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 			};
 			name = Debug;
 		};
@@ -191,6 +192,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
